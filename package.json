@@ -1,0 +1,31 @@
+{
+  "name": "playgen-backend",
+  "version": "1.0.0",
+  "description": "Playlist generator backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaurabhSonde/playgen-backend.git"
+  },
+  "author": "Saurabh Sonde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaurabhSonde/playgen-backend/issues"
+  },
+  "homepage": "https://github.com/SaurabhSonde/playgen-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.0.2",
+    "nodemon": "^2.0.21",
+    "passport": "^0.6.0",
+    "passport-spotify": "^2.0.0",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}
