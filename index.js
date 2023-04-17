@@ -17,7 +17,7 @@ app.use(session({
     secret: 'playgen',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
 }))
 
 // Connect to the database

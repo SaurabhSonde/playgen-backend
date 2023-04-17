@@ -1,6 +1,5 @@
 const User = require("../models/user")
 
-
 const spotifyCallback = async (req, res) => {
     try {
         if (req.user === null) return res.status(500).json({ error: 'Auth failed' });
@@ -17,12 +16,10 @@ const spotifyCallback = async (req, res) => {
             user.refresh_token = req.user.refresh_token
             user.expires_in = req.user.expires_in
             await user.save()
-            res.cookie('spotifyId', req.user.connection_app_id)
-            res.redirect(`http://localhost:4000/success`)
+            res.redirect(`http://localhost:3000/dashboard?code=${user._id}`)
         } else {
-            const data = User.create(req.user)
-            res.cookie('spotifyId', req.user.connection_app_id)
-            res.redirect(`http://localhost:4000/success`)
+            const data = await User.create(req.user)
+            res.redirect(`http://localhost:3000/dashboard?code=${data._id}`)
         }
 
     } catch (error) {
@@ -33,6 +30,25 @@ const spotifyCallback = async (req, res) => {
     }
 }
 
+const getUserInfo = async (req, res) => {
+    try {
+        const user = await User.findById({ _id: req.params.userId })
+        if (user !== null) {
+            res.status(200).json({
+                data: user
+            })
+        } else {
+            res.redirect('http://localhost:3000')
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            error: 'internal server error'
+        });
+    }
+}
+
 module.exports = {
-    spotifyCallback
+    spotifyCallback,
+    getUserInfo
 }
